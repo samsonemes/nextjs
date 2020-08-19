@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 function Home(props){
     const api = props.slip
-    const refresh = () => {
-        window.location.reload(false)
-    }
+    
      
     
     return(
@@ -14,13 +13,13 @@ function Home(props){
         <p className="text-2xl text-center border rounded-lg bg-gray-400 py-8">"{api.advice}"</p>
         <br/>
         <div className="text-center mt-8">
-        <button className="bg-black text-white px-3 py-2" onClick={refresh}>Next</button>
+        <button className="bg-black text-white px-3 py-2"><Link href="/"><a>Next</a></Link></button>
         </div>
         </div>
     )
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
     const res = await fetch('https://api.adviceslip.com/advice')
     const data = await res.json()
 
